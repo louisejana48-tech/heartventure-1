@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Heartventure 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Pixel font -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Press Start 2P', cursive;
+  background: linear-gradient(#fddde6, #c1e1dc);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #4a2c2a;
+}
+
+#game {
+  width: 90%;
+  max-width: 500px;
+  background: rgba(255,255,255,0.9);
+  border: 4px solid #e94b6a;
+  padding: 25px;
+  text-align: center;
+  border-radius: 14px;
+}
+
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+}
+
+.title {
+  font-size: 28px;
+  color: #e94b6a;
+  margin: 15px 0;
+}
+
+.subtitle {
+  font-size: 11px;
+  margin-bottom: 15px;
+}
+
+.dialogue {
+  font-size: 11px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+button {
+  font-family: 'Press Start 2P';
+  background: #fff;
+  border: 3px solid #e94b6a;
+  padding: 10px 16px;
+  margin: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ffe6ee;
+}
+
+.choices button {
+  font-size: 16px;
+}
+
+.final {
+  margin-top: 20px;
+  font-size: 10px;
+  color: #e94b6a;
+}
+</style>
+</head>
+
+<body>
+
+<div id="game">
+
+  <!-- START SCREEN -->
+  <div class="screen active" id="start">
+    <p class="subtitle">Ready for a little adventure?</p>
+    <h1 class="title">HEARTVENTURE</h1>
+    <p style="font-size:12px;">🐱🌸💖</p>
+    <button onclick="goTo('choice')">START</button>
+  </div>
+
+  <!-- HEART OR FLOWER -->
+  <div class="screen" id="choice">
+    <p class="dialogue">Pick a heart or a flower?</p>
+    <div class="choices">
+      <button onclick="pick('heart')">❤️</button>
+      <button onclick="pick('flower')">🌸</button>
+    </div>
+  </div>
+
+  <!-- PATH SCREEN -->
+  <div class="screen" id="path">
+    <p class="dialogue">You found a secret path!</p>
+    <p class="dialogue">Pick left or right?</p>
+    <div class="choices">
+      <button onclick="pickPath('left')">⬅ LEFT</button>
+      <button onclick="pickPath('right')">➡ RIGHT</button>
+    </div>
+  </div>
+
+  <!-- YES / NO -->
+  <div class="screen" id="end">
+    <p id="result" class="dialogue"></p>
+    <div class="choices">
+      <button onclick="answerYes()">YES 💖</button>
+      <button onclick="answerNo()">NO 🙈</button>
+    </div>
+  </div>
+
+  <!-- SECRET LETTER -->
+  <div class="screen" id="letter">
+    <p class="dialogue">
+      Dear Ezekiel 💌<br><br>
+      I made this little game because I’m too shy to say it directly.
+      But if you’re reading this, then you finished my tiny adventure.<br><br>
+      I like you. No, I love you. A lot. 🌸  
+      You make my days brighter just by existing and im very grateful that i've met you, I hope that you'd be part of my future, baby.
+    </p>
+
+    <p class="final">
+      Will you go on this adventure with me?<br><br>
+      — from someone who smiles whenever you cross her mind 💗
+    </p>
+  </div>
+
+</div>
+
+<script>
+let chosenItem = "";
+
+function goTo(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function pick(choice) {
+  chosenItem = choice;
+  goTo("path");
+}
+
+function pickPath(path) {
+  goTo("end");
+  document.getElementById("result").innerText =
+    "Ezekiel...\n\nEvery path somehow led here.\n\nSo I just wanted to ask, Will you be my valentine?";
+}
+
+function answerYes() {
+  document.getElementById("result").innerText =
+    "YEHEYYYYYYYY 🎉💖\n\n" +
+    "I LOVE YOUUUUUUUUUUUUUUUU 😭💗✨";
+
+  setTimeout(() => {
+    goTo("letter");
+  }, 2500);
+}
+
+function answerNo() {
+  document.getElementById("result").innerText =
+    "OH NO 😳\n\n* IHHHHHHHH PLEASEEEEE HUHU";
+
+  setTimeout(() => {
+    goTo("start");
+  }, 2000);
+}
+</script>
+
+</body>
+</html>
